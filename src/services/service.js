@@ -25,9 +25,11 @@ const fetchData = async(coinId,storeData=false)=>{
             }
             return newCrypto;
         }
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        throw error; // Rethrow the error if you want it to propagate
+    } catch (err) {
+        let error = new Error();
+        error.status = "400";
+        error.message = 'Error fetching data:', err;
+        throw error;
     }       
 }
 
@@ -47,19 +49,27 @@ const getLast100Records = async (coinId) => {
             .limit(100);
         
         return records;
-    } catch (error) {
-        console.error('Error fetching records:', error);
+    } catch (err) {
+        let error = new Error();
+        error.status = "400";
+        error.message = 'Error fetching records:'+ err;
+        throw error;
+        console.error();
     }
 };
 
 const calculateDeviation = (records) =>{
     if (!Array.isArray(records)) {
-        console.error('Error: Records is not an array');
-        return;
+        let error = new Error();
+        error.status = "400";
+        error.message = "Records are not in an array";
+        throw error;
     }
     if (records.length === 0) {
-        console.log('No records found');
-        return;
+        let error = new Error();
+        error.status = "400";
+        error.message = "No record Found";
+        throw error;
     }
     const prices = records.map(record => record.currentPrice);
     const mean = prices.reduce((sum, price) => sum + price, 0) / prices.length;

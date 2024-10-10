@@ -11,10 +11,10 @@ const cryptoSchema = new schema({
         type: String
     },
     twentyFourHourChange: {
-        type: String
+        type: Number
     },
     currentPrice: {
-        type: String
+        type: Number
     }
 },{timestamps:true}
 )

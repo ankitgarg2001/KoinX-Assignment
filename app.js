@@ -14,4 +14,16 @@ app.get('/', (req, res) => {
   res.sendFile(join(__dirname, '/index.html'))
 })
 
+app.use((err, req, res, next) => {
+    console.error(err.stack); 
+  
+    const statusCode = err.status || 500; 
+  
+    res.status(statusCode).json({
+      success: false,
+      err: err.message || "Internal Server Error",
+      errStack: process.env.NODE_ENV === "development" ? err.stack : {}, 
+    });
+  });
+
 export default app

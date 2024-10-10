@@ -2,7 +2,6 @@ import express from 'express'
 import routes from './src/Route/route.js'
 import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'
-import fetchData from './src/services/service.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
